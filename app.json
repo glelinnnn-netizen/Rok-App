@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "recipe-app",
+    "slug": "recipe-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/niche.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/niche.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/niche.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.engineerharmonysteam.recipeapp"
+    },
+    "web": {
+      "favicon": "./assets/niche.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c82de7cf-e122-4634-b763-695365eface5"
+      }
+    }
+  }
+}
