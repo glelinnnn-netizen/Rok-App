@@ -1,15 +1,36 @@
 //recipe-app/app/index.tsx
+//recipe-app/app/index.tsx
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import { recipes } from '../data/recipes';
 import RecipeCard from '../components/RecipeCard';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Home() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>🍳 My Recipe Book</Text>
-        <Text style={styles.headerSubtitle}>Discover delicious recipes</Text>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <View style={[styles.header, { backgroundColor: theme.colors.header }]}>
+        <View style={styles.headerRow}>
+          <View>
+            <Text style={[styles.headerTitle, { color: theme.colors.headerText }]}>
+              🍳 My Recipe Book
+            </Text>
+            <Text style={[styles.headerSubtitle, { color: theme.colors.headerSubtitle }]}>
+              Discover delicious recipes
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={styles.themeToggle}
+            onPress={toggleTheme}
+            accessibilityLabel="Toggle dark mode"
+          >
+            <Text style={styles.themeToggleText}>
+              {theme.isDark ? '☀️' : '🌙'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <FlatList
@@ -24,10 +45,22 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
       />
 
-      <View style={styles.footer}>
+      <View
+        style={[
+          styles.footer,
+          {
+            backgroundColor: theme.colors.footerBg,
+            borderTopColor: theme.colors.border,
+          },
+        ]}
+      >
         <Link href="/about" asChild>
-          <TouchableOpacity style={styles.aboutButton}>
-            <Text style={styles.aboutButtonText}>About This App</Text>
+          <TouchableOpacity
+            style={[styles.aboutButton, { backgroundColor: theme.colors.accent }]}
+          >
+            <Text style={[styles.aboutButtonText, { color: theme.colors.accentText }]}>
+              About This App
+            </Text>
           </TouchableOpacity>
         </Link>
       </View>
@@ -38,25 +71,37 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8',
   },
   header: {
-    backgroundColor: '#f4511e',
     paddingTop: 20,
     paddingBottom: 20,
     paddingHorizontal: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#fff',
   },
   headerSubtitle: {
     fontSize: 16,
-    color: '#ffe0d0',
     marginTop: 4,
+  },
+  themeToggle: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  themeToggleText: {
+    fontSize: 22,
   },
   listContainer: {
     paddingVertical: 10,
@@ -68,18 +113,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     padding: 20,
-    backgroundColor: 'rgba(248, 248, 248, 0.95)',
     borderTopWidth: 1,
-    borderTopColor: '#eee',
   },
   aboutButton: {
-    backgroundColor: '#f4511e',
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',
   },
   aboutButtonText: {
-    color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },

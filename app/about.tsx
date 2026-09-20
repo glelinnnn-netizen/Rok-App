@@ -1,64 +1,104 @@
 //recipe-app/app/about.tsx
-import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTheme } from '../context/ThemeContext';
 
 export default function About() {
   const router = useRouter();
+  const { theme } = useTheme();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+      contentContainerStyle={styles.scrollContent}
+    >
+      <View style={[styles.header, { backgroundColor: theme.colors.header }]}>
         <Text style={styles.emoji}>👨‍🍳</Text>
-        <Text style={styles.title}>Recipe Book App</Text>
-        <Text style={styles.version}>Version 1.0.0</Text>
+        <Text style={[styles.title, { color: theme.colors.headerText }]}>
+          Recipe Book App
+        </Text>
+        <Text style={[styles.version, { color: theme.colors.headerSubtitle }]}>
+          Version 1.0.0
+        </Text>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.sectionTitle}>About This App</Text>
-        <Text style={styles.text}>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+          About This App
+        </Text>
+        <Text style={[styles.text, { color: theme.colors.textSecondary }]}>
           This is a simple recipe book app built with React Native and Expo Router.
           It showcases basic navigation, dynamic routes, and list rendering.
         </Text>
 
-        <Text style={styles.sectionTitle}>Features</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+          Features
+        </Text>
         <View style={styles.featureList}>
-          <Text style={styles.featureItem}>✅ Browse recipe collection</Text>
-          <Text style={styles.featureItem}>✅ View detailed recipes</Text>
-          <Text style={styles.featureItem}>✅ Easy navigation</Text>
-          <Text style={styles.featureItem}>✅ Clean and simple design</Text>
+          <Text style={[styles.featureItem, { color: theme.colors.textSecondary }]}>
+            ✅ Browse recipe collection
+          </Text>
+          <Text style={[styles.featureItem, { color: theme.colors.textSecondary }]}>
+            ✅ View detailed recipes
+          </Text>
+          <Text style={[styles.featureItem, { color: theme.colors.textSecondary }]}>
+            ✅ Easy navigation
+          </Text>
+          <Text style={[styles.featureItem, { color: theme.colors.textSecondary }]}>
+            ✅ Clean and simple design
+          </Text>
+          <Text style={[styles.featureItem, { color: theme.colors.textSecondary }]}>
+            ✅ Dark mode support
+          </Text>
         </View>
 
-        <Text style={styles.sectionTitle}>Tech Stack</Text>
+        <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+          Tech Stack
+        </Text>
         <View style={styles.techStack}>
-          <View style={styles.techBadge}>
-            <Text style={styles.techText}>React Native</Text>
+          <View style={[styles.techBadge, { backgroundColor: theme.colors.emojiBg }]}>
+            <Text style={[styles.techText, { color: theme.colors.textSecondary }]}>
+              React Native
+            </Text>
           </View>
-          <View style={styles.techBadge}>
-            <Text style={styles.techText}>Expo</Text>
+          <View style={[styles.techBadge, { backgroundColor: theme.colors.emojiBg }]}>
+            <Text style={[styles.techText, { color: theme.colors.textSecondary }]}>
+              Expo
+            </Text>
           </View>
-          <View style={styles.techBadge}>
-            <Text style={styles.techText}>Expo Router</Text>
+          <View style={[styles.techBadge, { backgroundColor: theme.colors.emojiBg }]}>
+            <Text style={[styles.techText, { color: theme.colors.textSecondary }]}>
+              Expo Router
+            </Text>
           </View>
-          <View style={styles.techBadge}>
-            <Text style={styles.techText}>TypeScript</Text>
+          <View style={[styles.techBadge, { backgroundColor: theme.colors.emojiBg }]}>
+            <Text style={[styles.techText, { color: theme.colors.textSecondary }]}>
+              TypeScript
+            </Text>
           </View>
         </View>
       </View>
 
-      <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-        <Text style={styles.backButtonText}>← Back to Recipes</Text>
+      <TouchableOpacity
+        onPress={() => router.back()}
+        style={[styles.backButton, { backgroundColor: theme.colors.accent }]}
+      >
+        <Text style={[styles.backButtonText, { color: theme.colors.accentText }]}>
+          ← Back to Recipes
+        </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8',
+  },
+  scrollContent: {
+    paddingBottom: 20,
   },
   header: {
-    backgroundColor: '#f4511e',
     padding: 40,
     alignItems: 'center',
     borderBottomLeftRadius: 30,
@@ -71,11 +111,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
   },
   version: {
     fontSize: 14,
-    color: '#ffe0d0',
     marginTop: 4,
   },
   content: {
@@ -85,13 +123,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
     marginTop: 20,
     marginBottom: 10,
   },
   text: {
     fontSize: 16,
-    color: '#555',
     lineHeight: 24,
   },
   featureList: {
@@ -99,7 +135,6 @@ const styles = StyleSheet.create({
   },
   featureItem: {
     fontSize: 16,
-    color: '#555',
     marginBottom: 6,
   },
   techStack: {
@@ -108,7 +143,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   techBadge: {
-    backgroundColor: '#f0f0f0',
     paddingHorizontal: 14,
     paddingVertical: 6,
     borderRadius: 20,
@@ -117,17 +151,14 @@ const styles = StyleSheet.create({
   },
   techText: {
     fontSize: 14,
-    color: '#555',
   },
   backButton: {
-    backgroundColor: '#f4511e',
     padding: 16,
     margin: 20,
     borderRadius: 12,
     alignItems: 'center',
   },
   backButtonText: {
-    color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },
